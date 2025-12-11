@@ -1,0 +1,465 @@
+/* Base CSS */
+
+/* font family */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+button {
+  transition: all 0.3s;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  box-shadow: none;
+}
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+/* Layout hardening for Android WebView: ensure full-height and bottom-docked icons */
+html, body { height: 100%; }
+.main-area { min-height: 100vh; min-height: 100dvh; }
+/* make sure the content column can push to bottom reliably */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  /* small breathing room from bottom */
+  padding-bottom: 24px;
+}
+/* the HTML sets align-self-end on main-content; stretch it so inner flex can position bottom & center */
+.main-content.align-self-end { align-self: stretch; }
+/* keep the icon row on a single line and centered */
+.watch-media { width: 100%; position: absolute; left: 0; right: 0; bottom: 24px; z-index: 2; }
+.watch-media-wrapper {
+  flex-wrap: nowrap !important;
+  justify-content: center;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  width: 100vw;
+  max-width: 100vw;
+  overflow-x: auto;
+  align-items: flex-end;
+}
+/* Fallback spacing when flex gap is not supported (older Android WebView) */
+@supports not (gap: 1rem) {
+  .watch-media-wrapper > .media-item { margin-left: 95px; }
+  .watch-media-wrapper > .media-item:first-child { margin-left: 0; }
+}
+
+.theme-btn {
+  gap: 6px;
+  font-size: 15.4px;
+  line-height: 22px;
+  letter-spacing: 0.11px;
+  color: #303030;
+  background-color: #e3e3e3;
+  border: 1px solid #e3e3e3;
+  padding: 10px 18px 10px 13px;
+}
+.theme-btn .btn-icon {
+  width: 20px;
+  height: 20px;
+}
+.theme-btn svg path {
+  fill: currentColor;
+  transition: all 0.3s;
+}
+.theme-btn:hover {
+  background-color: transparent;
+  color: #e3e3e3;
+}
+/* font-family: "Urbanist", serif; */
+
+/* Base CSS End */
+
+/* main area start */
+.main-area {
+  background-image: url("../img/Poster.png");
+  background-size: cover;
+  background-position: center;
+}
+.main-area::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    4deg,
+    rgba(1, 1, 1, 0.86) 8.02%,
+    rgba(42, 42, 44, 0) 43.13%
+  );
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+.main-area-wrapper {
+  gap: 110px;
+  padding: 36px 52px 70px 120px;
+  min-height: 100vh;
+}
+.logo img {
+  max-width: 330px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+.welcome-text {
+  margin-top: 12px;
+  font-family: "Urbanist", sans-serif;
+  font-size: 36px;
+  line-height: 130%;
+}
+.welcome-text span {
+  font-weight: 200;
+}
+.sidebar-top {
+  margin-bottom: 43px;
+}
+.profile {
+  gap: 24px;
+  margin-bottom: 55px;
+}
+.profile-main {
+  gap: 12px;
+}
+.profile-photo {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border: 1px solid #8e918f;
+}
+.profile-name {
+  line-height: 1.5;
+  color: #e3e3e3;
+  letter-spacing: 0.15px;
+}
+.switch-account {
+  font-size: 12px;
+  color: #e3e3e3;
+  line-height: 16px;
+  letter-spacing: 0.2px;
+  opacity: 0.8;
+}
+.switch-account:hover {
+  opacity: 1;
+}
+/* Clear my data button (enhanced) */
+.logout-btn {
+  position: relative;
+  color: #1f1f1f;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.25px;
+  display: inline-flex;
+  gap: 8px;
+  padding: 6px 16px 6px 12px;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: linear-gradient(135deg,#fafafa,#d9d9d9);
+  border-radius: 28px;
+  box-shadow: 0 4px 10px -2px rgba(0,0,0,0.35),0 2px 3px rgba(0,0,0,0.25);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  text-transform: none;
+}
+.logout-btn img { width: 12px; height: 12px; filter: drop-shadow(0 1px 2px rgba(0,0,0,.35)); opacity: 0.6; }
+.logout-btn:hover img, .logout-btn:focus-visible img { opacity: 0.9; }
+.logout-btn:active img { opacity: 0.75; }
+.logout-btn span { color: #1f1f1f; white-space: nowrap; }
+.logout-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at 30% 20%,rgba(255,255,255,0.7),rgba(255,255,255,0) 60%);
+  opacity: 0.35;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+.logout-btn:hover, .logout-btn:focus-visible {
+  background: linear-gradient(135deg,#ffffff,#e5e5e5);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px -4px rgba(0,0,0,0.45),0 3px 6px rgba(0,0,0,0.3);
+}
+.logout-btn:active {
+  transform: translateY(0);
+  background: linear-gradient(135deg,#ececec,#cfcfcf);
+  box-shadow: 0 3px 8px -2px rgba(0,0,0,0.4),0 2px 4px rgba(0,0,0,0.3);
+}
+.logout-btn:focus-visible { outline: 2px solid #ffffff; outline-offset: 2px; }
+.sidebar-menu {
+  max-width: 256px;
+  gap: 12px;
+}
+.sidebar-menu-link {
+  padding: 12px 16px;
+  color: #c4c7c5;
+  font-family: "Urbanist", sans-serif;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0.15px;
+  gap: 12px;
+}
+.sidebar-menu-link .link-icon path {
+  fill: #c4c7c5;
+  transition: all 0.3s;
+}
+.sidebar-menu-link:hover {
+  color: #303030;
+  background-color: #e3e3e3;
+}
+.sidebar-menu-link:hover svg path {
+  fill: #303030;
+}
+.sidebar-menu-link svg {
+  width: 24px;
+}
+.settings-btn {
+  margin-top: 55px;
+}
+.main-content {
+  width: calc(100% - 505px);
+}
+.offer-slider-container {
+  max-width: 845px;
+}
+.offer-slide {
+  background-color: #131314;
+  border: 3px solid #8e918f;
+  border-radius: 20px;
+  padding: 32px;
+  overflow: hidden;
+  min-height: 316px;
+}
+.slide-content .subtitle {
+  font-size: 12px;
+  color: #c4c7c5;
+  opacity: 0.6;
+  letter-spacing: 0.25px;
+}
+.slide-content .title {
+  line-height: 1.33;
+  color: #e3e3e3;
+  margin-bottom: 12px;
+}
+.slide-content .desc {
+  color: #c4c7c5;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.25px;
+  margin-bottom: 28px;
+}
+.slide-content {
+  max-width: 360px;
+  position: relative;
+  z-index: 1;
+}
+.offer-slide .slide-thumb {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 556px;
+  height: 100%;
+}
+.offer-slide .slide-thumb::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    132.82% 137.96% at 95.04% 0%,
+    rgba(19, 19, 20, 0.1) 37%,
+    #131314 70.74%
+  );
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* slider pagination style */
+.swiper-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: max-content !important;
+  gap: 6px;
+  padding: 6px 8px;
+  background-color: rgba(0, 0, 0, 0.2);
+  left: auto !important;
+  right: 32px;
+  bottom: 32px !important;
+  top: auto !important;
+  border-radius: 40px;
+}
+.swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  background-color: #fff;
+  opacity: 0.2;
+  margin: 0 !important;
+  transition: all 0.3s;
+}
+.swiper-pagination-bullet-active,
+.swiper-pagination-bullet:hover {
+  opacity: 1;
+}
+.show-slider-container {
+  margin-right: -60px;
+}
+.show-slide {
+  width: 268px;
+}
+.show-slide-thumb {
+  border-radius: 20px;
+  overflow: hidden;
+}
+.show-slide-title {
+  color: #e3e3e3;
+  line-height: 1.5;
+  letter-spacing: 0.15px;
+}
+.show-slide.swiper-slide-active .show-slide-thumb {
+  /* transform: scale(1.1); removed to prevent resizing */
+  border: 2px solid #8e918f;
+  box-shadow: 0px 6px 10px 4px rgba(0, 0, 0, 0.15),
+    0px 2px 3px 0px rgba(0, 0, 0, 0.3);   
+  margin-bottom: 16px;
+}
+.show-slider {
+  padding: 120px 0 90px 20px;
+}
+/* Reduce gap and add horizontal padding to keep buttons away from edges */
+.watch-media-wrapper {
+  gap: 36px;
+  padding-left: 5px;
+  padding-right: 5px;
+  justify-content: center;
+}
+/* Remove ring on idle */
+.media-icon {
+  /* width: 64px;
+  height: 64px;
+  min-width: 64px;
+  min-height: 64px;
+  max-width: 64px;
+  max-height: 64px; */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+  margin-top: 16px; /* extra space for glow */
+  overflow: visible;
+  /* ring sizing variable (extra size added around icon for glow) */
+  --ring-padding: 4px;
+}
+/* Ensure only one line at the bottom, no wrapping */
+/* Center the row and prevent buttons from touching the edges */
+.watch-media {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  width: 100vw;
+  max-width: 100vw;
+  left: 0;
+  right: 0;
+  top: 24px;
+  bottom: 24px;
+  z-index: 2;
+  box-sizing: border-box;
+}
+.media-icon img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain;
+  border-radius: 50%;
+}
+/* ...existing code... */
+/* On hover/focus, show a lighter, less dark ring */
+/* On hover, show lighter ring and glow; on focus-visible, show only ring */
+.media-icon:hover::before,
+.media-icon:focus-visible::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  /* Instead of fixed 100px, size dynamically based on actual icon size plus padding */
+  width: calc(100% + var(--ring-padding) * 2);
+  height: calc(100% + var(--ring-padding) * 2);
+  border-radius: 50%;
+  background-color: rgba(255,255,255,0.10); /* lighter fill */
+  border: 2px solid rgba(255,255,255,0.28); /* softer ring */
+  box-shadow: 0 0 14px 0 rgba(180,180,180,0.45); /* reduced glow */
+  z-index: 1;
+  pointer-events: none;
+}
+.media-icon:hover,
+.media-icon:focus-visible {
+  position: relative;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  transform: none !important;
+}
+
+/* media icon label */
+/* new media item structure */
+.media-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+.media-item .media-label {
+  font-size: 14px;
+  line-height: 1.2;
+  font-family: "Urbanist", sans-serif;
+  letter-spacing: .3px;
+  color: #e3e3e3;
+  text-shadow: 0 2px 4px rgba(0,0,0,.6);
+  white-space: nowrap;
+}
+.media-item a.media-icon:focus img {
+  box-shadow: none !important;
+  border: none !important;
+  outline: none !important;
+  z-index: 2;
+  border-radius: 50%;
+  transform: none !important;
+}
+.media-item a.media-icon:hover img {
+  box-shadow: 0px 0px 20px 0px rgba(255,255,255,0.7), 0px 0px 20px 0px rgba(153, 153, 153, 1);
+  z-index: 2;
+  border-radius: 50%;
+  transform: none !important;
+}
+/* ensure svg icons (e.g., disney.svg) are not clipped and scale neatly */
+.media-icon img[src$=".svg"] { width: 90%; height: 90%; object-fit: contain; }
+
+/* main area end */
